@@ -15,15 +15,20 @@ namespace CretaceousApi.Controllers
       _db = db;
     }
 
-    // GET: api/Animals
+    // GET api/animals
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> Get(string species)
+    public async Task<ActionResult<IEnumerable<Animal>>> Get(string species, string name)
     {
       IQueryable<Animal> query = _db.Animals.AsQueryable();
 
       if (species != null)
       {
         query = query.Where(entry => entry.Species == species);
+      }
+
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name == name);
       }
 
       return await query.ToListAsync();
