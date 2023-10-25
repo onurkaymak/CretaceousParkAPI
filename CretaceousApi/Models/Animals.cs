@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CretaceousPark.Models
+namespace CretaceousApi.Models
 {
   public class Animal
   {
