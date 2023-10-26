@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CretaceousApi.Models
 {
-  public class CretaceousApiContext : DbContext
+  public class CretaceousApiContext : IdentityDbContext<ApplicationUser>
   {
     public DbSet<Animal> Animals { get; set; }
 
@@ -20,6 +22,16 @@ namespace CretaceousApi.Models
           new Animal { AnimalId = 4, Name = "Pip", Species = "Shark", Age = 4 },
           new Animal { AnimalId = 5, Name = "Bartholomew", Species = "Dinosaur", Age = 22 }
         );
+
+      var hasher = new PasswordHasher<IdentityUser>();
+      builder.Entity<ApplicationUser>()
+        .HasData(
+          new ApplicationUser { Id = "sda", UserName = "Joey", PasswordHash = hasher.HashPassword(null, "test"), Email = "joey@test.com", NormalizedEmail = "JOEY@TEST.COM" },
+          new ApplicationUser { Id = "abc", UserName = "Richard", PasswordHash = hasher.HashPassword(null, "test"), Email = "richard@test.com", NormalizedEmail = "RICHARD@TEST.COM" },
+          new ApplicationUser { Id = "frg", UserName = "Onur", PasswordHash = hasher.HashPassword(null, "test"), Email = "onur@test.com", NormalizedEmail = "ONUR@TEST.COM" }
+        );
+
+      base.OnModelCreating(builder);
     }
   }
 }
