@@ -17,7 +17,7 @@ builder.Services.AddDbContext<CretaceousApiContext>(
                 );
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<MessageBoardApiContext>()
+    .AddEntityFrameworkStores<CretaceousApiContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(options =>
